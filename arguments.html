@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>arguments</title>
+</head>
+<body>
+  
+</body>
+<script>
+  //1、arguments:在函数调用时，会自动在该函数内部生成一个名为arguments的隐藏对象。该对象类似于数组(有length属性)，但不是数组，可以用[]操作符获取函数调用时传递的实参;arguments保存的是实参的信息。
+  function testArg(){
+   // alert('real parameter count:' + arguments.length);
+    for (var i = 0;i<arguments.length;i++){
+     // alert(arguments[i]);
+    }
+  }
+  testArg(11);
+  testArg('像我这样迷茫的人');
+
+// arguments不是一个数组，由一下可验证
+(function(){
+  //alert(arguments instanceof Array); ///false;
+  //alert(typeof(arguments))//object;
+})();
+//当只有函数被调用时，argument
+alert(new Function().arguments);//return null
+/**
+*2、caller
+*在一个函数调用另一个函数时，被调用函数会自动生成一个caller属性，指向调用它的函数对象，若当前函数未被调用，或未被其他函数调用，则caller为null
+*/
+function testCaller() {
+  var caller = testCaller.caller;
+  alert(caller);
+}
+function aCaller() {
+  testCaller()
+}
+aCaller();
+
+/**
+*3、callee
+*当函数被调用时，它的arguments.callee对象就会指向自身，也就是对自己的引用。
+*由于arguments在函数被调用时才有效，因此arguments.callee在函数未调用时是不存在的
+*/
+function testCallee(arg){
+  alert(arguments.callee);
+}
+function bCaller(arg1,arg2){
+  testCallee();
+}
+bCaller();
+</script>
+</html>
