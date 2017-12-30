@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>隐藏动画案例</title>
+  <style>
+    div {
+      width: 400px;
+    }
+    img {
+      width: 90px;
+      height: 90px;
+      vertical-align: top;
+    }
+  </style>
+  <script src="jquery-1.12.2.js"></script>
+  <script>
+    $(function(){
+      $("#btn1").click(function(){
+        $("div>img").last("img").hide(800,function(){
+          $(this).prev().hide(800,arguments.callee)
+         
+        });
+        //当函数被调用时，它的arguments.callee对象就会指向自身，也就是一个对自己的引用
+      });
+      //显示
+      $("#btn2").click(function(){
+        $("div > img").first("img").show(800,function(){
+          $(this).next().show(800,arguments.callee)
+        })
+      })
+    })
+  </script>
+</head>
+<body>
+  <input type="button" value="隐藏动画" id="btn1">
+  <input type="button" value="显示动画" id="btn2">
+  <div>
+    <img src="images/1.jpg" alt="">
+    <img src="images/2.jpg" alt="">
+    <img src="images/3.jpg" alt="">
+    <img src="images/4.jpg" alt="">
+  </div>
+</body>
+</html>
